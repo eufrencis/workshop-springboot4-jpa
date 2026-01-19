@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 
-@RestController // diz ao Spring Boot que esta classe é um recurso web. Ela prepara a classe para responder requisições e garante que a resposta seja enviada no formato JSON.
+@RestController // é a junção de @controller que lida com requisições web e de @responseBody que indica que a resposta de cada metodo deve ser escrita diretamente no corpo da resposta HTTP convertendo diretamente dem JSON;
 @RequestMapping(value = "/users") // Aqui você define a "rota" ou o endereço do seu recurso.
 public class UserResource {
     
