@@ -1,5 +1,6 @@
 package com.example.course.config;
 
+
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import com.example.course.repositories.UserRepository;
 
 @Configuration // Mostra ao Spring que é uma classe especifica de configuração
 @Profile("test") // Mostra que é uma configuração específica para o perfil de teste. O nome teste tem que ser igual la em resources aplication.properties spring.profiles.active=test
-public class TestConfig implements CommandLineRunner{
+public class TestConfig implements CommandLineRunner{ // Essa interface é como um gatilho. O método que ela obriga você a criar (o método run) será executado automaticamente assim que o aplicativo terminar de subir
 //serve por enquanto pra fazer o database seeding povoar o banco de dados
     @Autowired
     private UserRepository userRepository;
