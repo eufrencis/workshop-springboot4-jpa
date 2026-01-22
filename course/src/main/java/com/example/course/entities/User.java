@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class User implements Serializable{
     private String email;
     private String phone;
     private String password;
-
+    @JsonIgnore // pra nao entrar em lop quando um cliente chama um pedido e um pedido chama um cliente
     @OneToMany(mappedBy = "client")
     private List <Order> orders = new ArrayList<>();
 
@@ -74,7 +76,7 @@ public class User implements Serializable{
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    @JsonIgnore // para nao ficar mostrando a senha do usuario na tela por segurança
     public String getPassword() {
         return password;
     }

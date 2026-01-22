@@ -3,6 +3,9 @@ package com.example.course.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +22,13 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonFormat(
+    shape = JsonFormat.Shape.STRING, // 1. Transforma a data em texto (String)
+    pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", // 2. Define o padrão ISO 8601 (padrão mundial)
+    timezone = "GMT" // 3. Garante que o horário seja o de Londres (UTC/Zero)
+    )   
     private Instant moment;
+   
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
