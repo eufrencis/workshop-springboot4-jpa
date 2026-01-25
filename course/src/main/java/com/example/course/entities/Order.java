@@ -29,7 +29,7 @@ public class Order implements Serializable {
     timezone = "GMT" // 3. Garante que o horário seja o de Londres (UTC/Zero)
     )   
     private Instant moment;
-    private Integer orderStatus;
+    private Integer orderStatus; // é integer para dizer explicitamente no banco de dados que estou guandando um INT
    
     @ManyToOne
     @JoinColumn(name = "client_id")
