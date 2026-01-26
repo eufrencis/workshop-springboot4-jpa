@@ -16,7 +16,7 @@ import com.example.course.services.CategoryService;
 
 
 @RestController
-@RequestMapping(value = "/Categories")
+@RequestMapping(value = "/categories")
 public class CategoryResource {
 
     @Autowired
