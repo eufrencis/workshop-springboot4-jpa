@@ -8,16 +8,7 @@ import java.util.Set;
 import com.example.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_order")
@@ -41,6 +32,9 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER) // Força o carregamento dos itens junto com o pedido para evitar o erro de 'no session')
     private Set<OrderItem> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL) // cascade para os dois ter o mesmo Id tanto order quanto payment
+    private Payment payment;
 
 
     public Order (){}
@@ -88,6 +82,14 @@ public class Order implements Serializable {
     }
     public Set<OrderItem> getItems() {
         return items;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
