@@ -1,19 +1,15 @@
 package com.example.course.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.course.entities.User;
 import com.example.course.services.UserService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController // é a junção de @controller que lida com requisições web e de @responseBody que indica que a resposta de cada metodo deve ser escrita diretamente no corpo da resposta HTTP convertendo diretamente dem JSON;
@@ -37,6 +33,15 @@ public class UserResource {
     return ResponseEntity.ok().body(obj);
 
     }
+
+    @PostMapping
+    public ResponseEntity <User> insert(@RequestBody User obj){
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).body(obj);
+
+    }
+
     
     
 
