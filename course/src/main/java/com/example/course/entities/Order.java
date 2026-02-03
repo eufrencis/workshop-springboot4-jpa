@@ -2,7 +2,9 @@ package com.example.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.example.course.entities.enums.OrderStatus;
@@ -90,6 +92,14 @@ public class Order implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Double getTotal(){
+        double total = 0.0;
+        for(OrderItem x: items) total += x.getSubTotal();
+        return  total;
+
+
     }
 
     @Override
