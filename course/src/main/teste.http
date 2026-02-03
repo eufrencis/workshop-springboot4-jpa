@@ -3,4 +3,8 @@ GET https://examples.http-client.intellij.net/get
     ?generated-in=IntelliJ IDEA
 
 ###
-GET http://localhost:8080/orders
+GET http://localhost:8080/products/3
+
+###
+
+GET http://localhost:8080/orders/1
