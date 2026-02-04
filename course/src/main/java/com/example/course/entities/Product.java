@@ -1,5 +1,6 @@
 package com.example.course.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
