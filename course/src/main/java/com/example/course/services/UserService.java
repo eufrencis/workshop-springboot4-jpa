@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.course.services.exceptions.DatabaseException;
 import com.example.course.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -46,11 +47,16 @@ public class UserService {
         }
     }
 
-    @Transactional
+    @Transactional //garante que a conexão com o banco fique aberta durante todo o processo de atualização.
     public User update (Long id, User obj){
-        User entity = repository.getReferenceById(id); // findbyId vai no bando de dados e tras o objeto o referenc so prepara o objeto monitorado pra alterar e dps mudar o banco de dados
-        updateData(entity, obj);
-        return repository.save(entity);
+        try {
+            User entity = repository.getReferenceById(id); // findbyId vai no bando de dados e tras o objeto o referenc so prepara o objeto monitorado pra alterar e dps mudar o banco de dados
+            updateData(entity, obj);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+
     }
 
     private void updateData(User entity, User obj) {
